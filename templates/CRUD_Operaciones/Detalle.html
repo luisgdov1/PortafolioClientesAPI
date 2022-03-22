@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Cliente</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href='{% static "assets/favicon.ico" %}' />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link type="text/css" href='{% static "css/styles.css" %}' rel="stylesheet" />
+</head>
+<body>
+<div>
+    {% if messages %}
+        <span class="d-block p-2 bg-primary text-white messages">
+        {% for message in messages %}
+        <a>{{ message }}</a>
+        {% endfor %}
+        </span>
+    {% endif %}
+</div>
+<section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Detalle Cliente</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Grid Items-->
+                <div class="row justify-content-center">
+                    <label class="col-sm-2 col-form-label">Nombre        </label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="{{ Cliente.nombre_Cliente }}">
+                    </div>
+                    <label class="col-sm-2 col-form-label">Email         </label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="{{ Cliente.email_Cliente }}">
+                    </div>
+                    <label class="col-sm-2 col-form-label">Direccion     </label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="{{ Cliente.direccion_Cliente }}">
+                    </div>
+                    <label class="col-sm-2 col-form-label">Telefono      </label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="{{ Cliente.telefono_Cliente }}">
+                    </div>
+                    <div class="mb-auto col">
+                        <a style="color: white" href="{% url 'inicio' %}"><button class="btn btn-info" > Inicio </button></a>
+                        {% if user.is_authenticated %}
+                        <a style="color: white" href="{% url 'editar' Cliente.id %}"><button class="btn btn-info" > Editar </button></a>
+                        <form method="POST" action="{% url 'eliminar' Cliente.id %}">
+                           <button class="btn btn-info" type="submit" value="DELETE" > Eliminar </button>
+                            {% csrf_token %}
+                        </form>
+                        {% endif %}
+
+                    </div>
+                    </div>
+            </div>
+        </section>
+</body>
+</html>

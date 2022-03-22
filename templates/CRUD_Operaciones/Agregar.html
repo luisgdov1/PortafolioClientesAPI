@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href='{% static "assets/favicon.ico" %}' />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link type="text/css" href='{% static "css/styles.css" %}' rel="stylesheet" />
+</head>
+<body>
+{% if user.is_authenticated %}
+<div>
+    {% if messages %}
+        <span class="d-block p-2 bg-primary text-white messages">
+        {% for message in messages %}
+        <a>{{ message }}</a>
+        {% endfor %}
+        </span>
+    {% endif %}
+</div>
+
+
+<section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Agregar Cliente al portafolio</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!---ZONA DE MENSAJES--->
+
+                <!-- Portfolio Grid Items-->
+                 <div class="form-group form-control-lg ">
+                   <form method="POST">
+                       <table>
+                           {{ form }}
+                       </table>
+                       <button class="btn btn-primary" type="submit">Agregar</button>
+                       {% csrf_token %}
+                   </form>
+                     <button class="btn btn-info" ><a style="color: white" href="{% url 'inicio' %}"> Inicio </a></button>
+                 </div>
+                </div>
+            </div>
+        </section>
+{% endif %}
+</body>
+</html>
